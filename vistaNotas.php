@@ -27,6 +27,11 @@
             
             <!-- Campos para las notas -->
             <div class="mb-3">
+                <input type="number" class="d-none" id="estudiante">
+                <label for="nota1" class="form-label">Estudiante</label>
+                <select class="form-control"   id="id_estudiante"></select>
+            </div>
+            <div class="mb-3">
                 <input type="number" class="d-none" id="notasid">
                 <label for="nota1" class="form-label">Nota 1</label>
                 <input type="number" class="form-control" id="nota1" min="0" max="10" required>
@@ -49,15 +54,17 @@
 
             
             <!-- Botón para agregar los datos -->
-            <button type="button" class="btn btn-primary" id="boton1">Guardar</button>
+            <button type="button" class="btn btn-success mb-3" id="boton1">Guardar</button>
 
             <button class="btn btn-success d-none" id="boton2">Actualizar</button>
 
-            <a href="vistaEstudiantes.php" class="btn btn-primary" id="boton3">Registrar estudiantes</a>
+            <a href="vistaEstudiantes.php" class="btn btn-success mb-3" id="boton3">Registro estudiantes</a>
 
-            <a href="vistaMaterias.php" class="btn btn-primary" id="boton4">Registrar materias</a>
+            <a href="vistaMaterias.php" class="btn btn-success mb-3" id="boton4">Registro materias</a>
 
-            <a href="vistaProfesores.php" class="btn btn-primary" id="boton5">Registro Profesores</a>
+            <a href="vistaProfesores.php" class="btn btn-success mb-3" id="boton5">Registro Profesores</a>
+
+            <a href="vistaEMNP.php" class="btn btn-primary" id="boton6">Inicio</a>
        
 
         <h3 class="mt-4">Notas Registradas</h3>
@@ -66,6 +73,7 @@
             <thead>
                 <tr>
                     <th>Id</th>
+                    <th>Estudiante</th>
                     <th>Nota 1</th>
                     <th>Nota 2</th>
                     <th>Nota 3</th>

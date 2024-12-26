@@ -7,16 +7,14 @@ if ($indicador == "1") {
 
     
     $nombre = $_POST['nombre'];
-    $materia_que_da = $_POST['materia'];
     $documento = $_POST['documento'];
 
-    $query = "INSERT INTO profesores (nombre, materia_que_da, documento )
-    VALUES (:nombre, :materia_que_da, :documento )";
+    $query = "INSERT INTO profesores (nombre, documento )
+    VALUES (:nombre, :documento )";
 
     $qry = $inicioRegistrodb ->prepare($query);
 
     $qry -> bindParam(':nombre', $nombre, PDO::PARAM_STR);
-    $qry -> bindParam(':materia_que_da', $materia_que_da, PDO::PARAM_STR);
     $qry -> bindParam(':documento', $documento, PDO::PARAM_INT);
 
  if ($qry->execute()) {
@@ -50,6 +48,7 @@ if ($indicador == '2') {
     $qry2->execute();
     $rta2 = $qry2->fetchAll(PDO::FETCH_OBJ);
 
+
     $response = array('rta' => $count, 'rta2' => $rta2);
     header('Content-Type: application/json');
     echo json_encode($response);
@@ -79,16 +78,14 @@ if ($indicador == '4') {
 
     $id = $_POST['id'];
     $nombre =  $_POST['nombre'];
-    $materia_que_da = $_POST['materia_que_da'];
     $documento = $_POST['documento'];
 
-    $query ="UPDATE profesores SET nombre = :nombre, materia_que_da = :materia_que_da, documento = :documento WHERE id = :id";
+    $query ="UPDATE profesores SET nombre = :nombre, documento = :documento WHERE id = :id";
 
     $qry= $inicioRegistrodb ->prepare($query);
 
     $qry -> bindParam(':id', $id, PDO::PARAM_INT);
     $qry -> bindParam(':nombre', $nombre, PDO::PARAM_STR);
-    $qry -> bindParam(':materia_que_da', $materia_que_da, PDO::PARAM_STR);
     $qry -> bindParam(':documento', $documento, PDO::PARAM_INT);
 
     if ($qry->execute()) {
@@ -120,3 +117,4 @@ if ($indicador == '5') {
     header('Content-Type: application/json');
     echo json_encode(Array('rta' => $rta));
 }
+

@@ -41,6 +41,7 @@ $('#boton7').on('click', function () {
     $('#boton3').removeClass('d-none')
     $('#boton4').removeClass('d-none');
     $('#boton5').removeClass('d-none');
+    $('#boton8').removeClass('d-none');
 
     $('#modalestudiantes').modal('hide');
 
@@ -190,7 +191,7 @@ function vistaEstudiantes(ind, inicio, nroreg) {
 
 function leerEstudiante(id) {
 
-
+    $('#boton8').addClass('d-none');
     $('#boton5').addClass('d-none');
     $('#boton4').addClass('d-none');
     $('#boton3').addClass('d-none');
@@ -261,6 +262,7 @@ function actualizarEstudiantes() {
             $('#boton3').removeClass('d-none')
             $('#boton4').removeClass('d-none');
             $('#boton5').removeClass('d-none');
+            $('#boton8').removeClass('d-none');
 
             $('#modalestudiantes').modal('hide');
         }

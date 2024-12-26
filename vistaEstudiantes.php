@@ -19,13 +19,15 @@
 
         <a href="vistaInicio.php" class="btn btn-danger logout-btn" id="botonLogout">Cerrar sesión</a>
 
-        <a href="vistaMaterias.php" class="btn btn-primary" id="boton3">Registrar materias</a>
+        <a href="vistaMaterias.php" class="btn btn-success mb-3" id="boton3">Registro materias</a>
 
-        <a href="vistaNotas.php" class="btn btn-primary" id="boton4">Registro notas</a>
+        <a href="vistaNotas.php" class="btn btn-success mb-3" id="boton4">Registro notas</a>
 
-        <a href="vistaProfesores.php" class="btn btn-primary" id="boton5">Registro Profesores</a>
+        <a href="vistaProfesores.php" class="btn btn-success mb-3" id="boton5">Registro Profesores</a>
 
-        <button class="btn btn-primary" id="boton6">nuevo estudiante</button>
+        <button class="btn btn-success mb-3" id="boton6">Nuevo estudiante</button>
+
+        <a href="vistaEMNP.php" class="btn btn-primary" id="boton8">Inicio</a>
 
 
 

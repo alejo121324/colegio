@@ -29,24 +29,29 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label">profesor:</label>
-            <input type="text" id="profesor"  class="form-control">
+            <label class="form-label ">profesor:</label>
+            <select class="form-control mb-3"   id="id_profesor">
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3"> 
+            <input type="text" class="form-control d-none" id="m">
             <label class="form-label">duracion:</label>
             <input type="text" id="duracion" class="form-control">
         </div>
 
-        <button class="btn btn-primary" id="boton1">Guardar</button>
+       
+
+        <button class="btn btn-success mb-3" id="boton1">Guardar</button>
         
         <button class="btn btn-success d-none" id="boton2">Actualizar</button>
 
-        <a href="vistaEstudiantes.php" class="btn btn-primary" id="boton3">Registrar estudiantes</a>
+        <a href="vistaEstudiantes.php" class="btn btn-success mb-3" id="boton3">Registro estudiantes</a>
 
-        <a href="vistaNotas.php" class="btn btn-primary" id="boton4">Registro notas</a>
+        <a href="vistaNotas.php" class="btn btn-success mb-3" id="boton4">Registro notas</a>
 
-        <a href="vistaProfesores.php" class="btn btn-primary" id="boton5">Registro Profesores</a>
+        <a href="vistaProfesores.php" class="btn btn-success mb-3" id="boton5">Registro Profesores</a>
+
+        <a href="vistaEMNP.php" class="btn btn-primary" id="boton6">Inicio</a>
 
     <h2 class="mt-5">Materias registradas</h2>
 

@@ -29,9 +29,42 @@ $('#boton2').on('click', function () {
 })
 
 $(document).ready(function () {
+    
+    selecEstudiante()
     selecMateria();
     imprimirNotas(3, 1, 5);
 })
+
+function selecEstudiante() {
+    let formData = new FormData();
+    formData.append('ind', '7');
+
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            $('#id_estudiante').empty();
+            var htmlTags = '<option value="">Selecciona tu estudiante</option>';
+            data.rta.forEach(function (item) {
+                htmlTags += '<option value="' + item.id + '">' + item.nombre + '</option>';
+            });
+            $('#id_estudiante').append(htmlTags);
+        },
+        error: function (error) {
+            swal.fire({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                icon: 'error',
+                title: 'Error al cargar lals materias'
+            });
+        }
+    });
+}
 
 function selecMateria() {
     let formData = new FormData();
@@ -89,6 +122,7 @@ function guardarNotas() {
     
     // Obtener el id de la materia seleccionada
     let id_materias = $('#select_materia').val();
+    let id_estudiante = $('#id_estudiante').val();
     
     // Realizar la solicitud AJAX
     $.ajax({
@@ -97,6 +131,7 @@ function guardarNotas() {
         dataType: 'json',
         data: {
             ind: '2',
+            id_estudiante: id_estudiante,
             nota1: nota1,
             nota2: nota2,
             nota3: nota3,
@@ -110,6 +145,7 @@ function guardarNotas() {
 
             alert("se guardo correctamente")
 
+            $('#id_estudiante').val('');
             $('#nota1').val('');
             $('#nota2').val('');
             $('#nota3').val('');
@@ -148,6 +184,7 @@ function imprimirNotas(ind, inicio, nroreg) {
         data.rta2.forEach(function (item) {
             htmlTags += ' <tr> ';
             htmlTags += '    <td>' + item.id + '</td>';
+            htmlTags += '    <td>' + item.nombre + '</td>';
             htmlTags += '    <td>' + item.nota1 + '</td>';
             htmlTags += '    <td>' + item.nota2 + '</td>';
             htmlTags += '    <td>' + item.nota3 + '</td>';
@@ -227,6 +264,7 @@ function imprimirNotas(ind, inicio, nroreg) {
 }
 
 function leerNotas(id) {
+    $('#boton6').addClass('d-none');
     $('#boton5').addClass('d-none');
     $('#boton4').addClass('d-none');
     $('#boton3').addClass('d-none');
@@ -248,7 +286,7 @@ function leerNotas(id) {
         $('#nota2').val(data.rta.nota2);
         $('#nota3').val(data.rta.nota3);
         $('#select_materia').val(data.rta.id_materias);
-
+        $('#id_estudiante').val(data.rta.id_estudiante).prop('disabled', true);
 
     }).fail(function (error) {
         alert("error al leer los datos")
@@ -269,6 +307,10 @@ function actualizarNotas() {
 
     let id_materias = $('#select_materia').val();
 
+    let id_estudiante = $('#id_estudiante').val();
+
+    console.log(id_estudiante);
+    
 
     $.ajax({
         url: url,
@@ -281,6 +323,7 @@ function actualizarNotas() {
             nota2: nota2,
             nota3: nota3,
             id_materias: id_materias,
+            id_estudiante: id_estudiante,
             promedio: promedio
 
         }
@@ -295,6 +338,7 @@ function actualizarNotas() {
             $('#nota2').val('');
             $('#nota3').val('');
             $('#select_materia').val("");
+            $('#id_estudiante').val("").prop('disabled', false);
 
             imprimirNotas(2, 1, 5);
 
@@ -304,6 +348,7 @@ function actualizarNotas() {
             $('#boton3').removeClass('d-none');
             $('#boton4').removeClass('d-none');
             $('#boton5').removeClass('d-none');
+            $('#boton6').removeClass('d-none');
         }
     }).fail(function (error) {
         alert("ha fallado en la actualizacion")

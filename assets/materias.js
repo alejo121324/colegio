@@ -1,7 +1,7 @@
 let url = "./backend/materiasBack.php"
 
 $('#boton1').on('click', function () {
-    if ($('#materia').val() === '' || $('#profesor').val() === '' || $('#duracion').val() === '') {
+    if ($('#materia').val() === '' || $('#id_profesor').val() === '' || $('#duracion').val() === '') {
 
         alert("todos los campos deben estar llenos")
 
@@ -12,7 +12,7 @@ $('#boton1').on('click', function () {
 })
 
 $('#boton2').on('click', function () {
-    if ($('#materia').val() === '' || $('#profesor').val() === '' || $('#duracion').val() === '') {
+    if ($('#materia').val() === '' || $('#id_profesor').val() === '' || $('#duracion').val() === '') {
 
         alert("todos los campos deben estar llenos")
 
@@ -23,13 +23,16 @@ $('#boton2').on('click', function () {
 
 
 $(document).ready(function () {
+    
+    selecProfesor();
     inprimirMaterias(2, 1, 5);
+
 })
 
 function guardarMaterias() {
 
     let nombre_materia = $('#materia').val();
-    let profesor = $('#profesor').val();
+    let id_profesor = $('#id_profesor').val();
     let duracion_clase = $('#duracion').val();
 
     $.ajax({
@@ -40,7 +43,7 @@ function guardarMaterias() {
         data: {
             ind: '1',
             nombre: nombre_materia,
-            profesor: profesor,
+            id_profesor: id_profesor,
             duracion: duracion_clase
         }
     }).done(function (data) {
@@ -49,7 +52,7 @@ function guardarMaterias() {
             alert("se guardo correctamente")
 
             $('#materia').val('');
-            $('#profesor').val('');
+            $('#id_profesor').val('');
             $('#duracion').val('');
 
             inprimirMaterias(2, 1, 5);
@@ -86,7 +89,7 @@ function inprimirMaterias(ind, inicio, nroreg) {
             htmlTags += ' <tr> ';
             htmlTags += '    <td >' + item.id + '</td>';
             htmlTags += '    <td>' + item.nombre_materia + '</td>';
-            htmlTags += '    <td>' + item.profesor + '</td>';
+            htmlTags += '    <td>' + item.nombre + '</td>';
             htmlTags += '     <td>' + item.duracion + '</td>';
             htmlTags += '     <td>';
             htmlTags += '         <span onclick="leerMaterias(' + item.id + ');" style="cursor: pointer;">';
@@ -161,6 +164,7 @@ function inprimirMaterias(ind, inicio, nroreg) {
 }
 
 function leerMaterias(id) {
+    $('#boton6').addClass('d-none');
     $('#boton5').addClass('d-none');
     $('#boton4').addClass('d-none');
     $('#boton3').addClass('d-none');
@@ -179,7 +183,7 @@ function leerMaterias(id) {
 
         $('#materiasid').val(data.rta.id);
         $('#materia').val(data.rta.nombre_materia);
-        $('#profesor').val(data.rta.profesor);
+        $('#id_profesor').val(data.rta.id_profesor).prop('disabled', true);
         $('#duracion').val(data.rta.duracion);
 
     }).fail(function (error) {
@@ -192,7 +196,7 @@ function actualizarMaterias() {
 
     let id = $('#materiasid').val();
     let nombre_materia = $('#materia').val();
-    let profesor = $('#profesor').val();
+    let id_profesor = $('#id_profesor').val();
     let duracion = $('#duracion').val();
 
     $.ajax({
@@ -203,7 +207,7 @@ function actualizarMaterias() {
             ind: '4',
             id: id,
             materia: nombre_materia,
-            profesor: profesor,
+            id_profesor: id_profesor,
             duracion: duracion
 
         }
@@ -215,17 +219,18 @@ function actualizarMaterias() {
 
             $('#materiasid').val('');
             $('#materia').val('');
-            $('#profesor').val('');
+            $('#id_profesor').val('').prop('disabled', false);
             $('#duracion').val('');
 
             inprimirMaterias(2, 1, 5);
 
 
-            $('#boton2').addClass('d-none')
-            $('#boton1').removeClass('d-none')
-            $('#boton3').removeClass('d-none')
+            $('#boton2').addClass('d-none');
+            $('#boton1').removeClass('d-none');
+            $('#boton3').removeClass('d-none');
             $('#boton4').removeClass('d-none');
             $('#boton5').removeClass('d-none');
+            $('#boton6').removeClass('d-none');
         }
     }).fail(function (error) {
         alert("ha fallado en la actualizacion")
@@ -255,4 +260,36 @@ function eliminarEstudiantes(id) {
 
         alert("error al eliminar el estudiante")
     })
+}
+
+
+function selecProfesor() {
+    let formData = new FormData();
+    formData.append('ind', '6');
+
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            $('#id_profesor').empty();
+            var htmlTags = '<option value="">Selecciona el profesor</option>';
+            data.rta.forEach(function (item) {
+                htmlTags += '<option value="' + item.id + '">' + item.nombre + '</option>';
+            });
+            $('#id_profesor').append(htmlTags);
+        },
+        error: function (error) {
+            swal.fire({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                icon: 'error',
+                title: 'Error al cargar lals materias'
+            });
+        }
+    });
 }

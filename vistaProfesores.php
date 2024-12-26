@@ -18,7 +18,7 @@
   
 <a href="vistaInicio.php" class="btn btn-danger logout-btn" id="botonLogout">Cerrar sesión</a>
 <div class="container py-4">
-    <div class="row g-4">
+    <div class="row g-4 mt-5">
       <!-- Formulario de registro -->
       <div class="col-md-6">
         <div class="card shadow-sm">
@@ -30,23 +30,23 @@
                 <label for="nombre" class="form-label">Nombre</label>
                 <input type="text" id="nombre" class="form-control" placeholder="Ingrese el nombre" required>
               </div>
-              <div class="mb-3">
-                <label for="materia" class="form-label">Materia que dicta</label>
-                <input type="text" id="materia_que_da" class="form-control" placeholder="Ingrese la materia" required>
-              </div>
+             
               <div class="mb-3">
                 <label for="documento" class="form-label">Documento</label>
                 <input type="text" id="documento" class="form-control" placeholder="Ingrese el documento" required>
               </div>
-              <button id="boton1"  class="btn btn-primary w-100 mb-4 ">Registrar</button>
+              <button id="boton1"  class="btn btn-success mb-3 w-100 mb-4 ">Registrar</button>
        
         <button class="btn btn-success d-none" id="boton2">Actualizar</button>
 
-        <a href="vistaEstudiantes.php" class="btn btn-primary" id="boton3">Registro estudiantes</a>
+        <a href="vistaEstudiantes.php" class="btn btn-success mb-3" id="boton3">Registro estudiantes</a>
 
-        <a href="vistaNotas.php" class="btn btn-primary" id="boton4">Registro notas</a>
+        <a href="vistaNotas.php" class="btn btn-success mb-3" id="boton4">Registro notas</a>
 
-        <a href="vistaMaterias.php" class="btn btn-primary" id="boton5">Registrar materias</a>
+        <a href="vistaMaterias.php" class="btn btn-success mb-3" id="boton5">Registro materias</a>
+
+        <a href="vistaEMNP.php" class="btn btn-primary" id="boton6">Inicio</a>
+
 
 
 
@@ -64,7 +64,6 @@
                 <tr>
                   <th>Id</th>
                   <th>Nombre</th>
-                  <th>Materia que dicta</th>
                   <th>Documento</th>
                 </tr>
               </thead>
